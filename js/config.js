@@ -5,10 +5,10 @@ const SEARCH_HISTORY_KEY = 'videoSearchHistory';
 const MAX_HISTORY_ITEMS = 5;
 
 // 密码保护配置
+// 注意：PASSWORD 环境变量是必需的，所有部署都必须设置密码以确保安全
 const PASSWORD_CONFIG = {
     localStorageKey: 'passwordVerified',  // 存储验证状态的键名
-    verificationTTL: 90 * 24 * 60 * 60 * 1000,  // 验证有效期（90天，约3个月）
-    adminLocalStorageKey: 'adminPasswordVerified'  // 新增的管理员验证状态的键名
+    verificationTTL: 90 * 24 * 60 * 60 * 1000  // 验证有效期（90天，约3个月）
 };
 
 // 网站信息配置
@@ -179,6 +179,16 @@ const API_SITES = {
     //     name: 'U酷资源'
     // },
 };
+
+// 定义合并方法
+function extendAPISites(newSites) {
+    Object.assign(API_SITES, newSites);
+}
+
+// 暴露到全局
+window.API_SITES = API_SITES;
+window.extendAPISites = extendAPISites;
+
 
 // 添加聚合搜索的配置选项
 const AGGREGATED_SEARCH_CONFIG = {
